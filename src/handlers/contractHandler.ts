@@ -13,7 +13,7 @@ export async function logContractFunctionCalls(topics) {
         const logs = await provider.getLogs({
             address: contractAddress,
             topics: [topics],
-            fromBlock: await provider.getBlockNumber() - 2000, 
+            fromBlock: await provider.getBlockNumber() - 5000, 
             toBlock: 'latest', 
         });
 

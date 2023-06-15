@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import Link from 'next/link'
 
 export default function IncreaseGuaranteedUsdQueries() {
     const [queryFunctionResults, setQFR] = useState();
@@ -21,7 +22,7 @@ export default function IncreaseGuaranteedUsdQueries() {
                 {queryFunctionResults.map((log, index) => (
                     <li key={index} className="bg-white p-4 shadow-md">
                         <div>
-                        <strong>Transaction Hash:</strong> {log.transactionHash}
+                        <strong>Transaction Hash: </strong><Link className="text-blue-500 underline" target="_blank" rel="noopener noreferrer" href={`https://arbiscan.io/tx/${log.transactionHash}`}>{log.transactionHash}</Link>
                         </div>
                         <div>
                         <strong>Block Number:</strong> {log.blockNumber}
