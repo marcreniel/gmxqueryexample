@@ -3,7 +3,17 @@
 import { useEffect, useState } from 'react';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import Header from '@/app/components/header'
+
 import DecreasePoolAmountQueries from '@/app/components/decreasePoolAmountQueries'
+import IncreasePoolAmountQueries from '@/app/components/increasePoolAmountQueries'
+import SwapQueries from '@/app/components/swapQueries'
+import CollectMarginFees from '@/app/components/collectMarginFees'
+import DecreaseReservedAmount from '@/app/components/decreaseGuaranteedUsdQueries'
+import IncreaseReservedAmount from '@/app/components/increaseReservedAmountQueries'
+import BuyUSDGQueries from '@/app/components/buyUSDGQueries'
+import UpdatePnlQueries from '@/app/components/updatePnlQueries'
+import DecreaseGuaranteedUsdQueries from '@/app/components/decreaseGuaranteedUsdQueries'
+import IncreaseGuaranteedUsdQueries from '@/app/components/increaseReservedAmountQueries'
 
 export default function Home() {
   const [queryFunctionResults, setQFR] = useState();
@@ -34,20 +44,45 @@ export default function Home() {
             <TabList className="tabs tabs-boxed">
               <Tab className="tab">DecreasePoolAmount() Queries</Tab>
               <Tab className="tab">IncreasePoolAmount() Queries</Tab>
-              <Tab className="tab">CollectSwapFees() Queries</Tab>
-              <Tab className="tab">UpdateFundingRate() Queries</Tab>
-              <Tab className="tab">IncreaseReservedAmount() Queries</Tab>
+              <Tab className="tab">Swap() Queries</Tab>
               <Tab className="tab">CollectMarginFees() Queries</Tab>
+              <Tab className="tab">DecreaseReservedAmount() Queries</Tab>
+              <Tab className="tab">IncreaseReservedAmount() Queries</Tab>
+              <Tab className="tab">BuyUSDG() Queries</Tab>
+              <Tab className="tab">UpdatePnl() Queries</Tab>
+              <Tab className="tab">DecreaseGuaranteedUsd() Queries</Tab>
+              <Tab className="tab">IncreaseGuaranteedUsd() Queries</Tab>
             </TabList>
 
             <TabPanel>
               <DecreasePoolAmountQueries/>
             </TabPanel>
             <TabPanel>
-              <h2>Content for Tab 2</h2>
+              <IncreasePoolAmountQueries/>
             </TabPanel>
             <TabPanel>
-              <h2>Content for Tab 3</h2>
+              <SwapQueries/>
+            </TabPanel>
+            <TabPanel>
+              <CollectMarginFees/>
+            </TabPanel>
+            <TabPanel>
+              <DecreaseReservedAmount/>
+            </TabPanel>
+            <TabPanel>
+              <IncreaseReservedAmount/>
+            </TabPanel>
+            <TabPanel>
+              <BuyUSDGQueries/>
+            </TabPanel>
+            <TabPanel>
+              <UpdatePnlQueries/>
+            </TabPanel>
+            <TabPanel>
+              <DecreaseGuaranteedUsdQueries/>
+            </TabPanel>
+            <TabPanel>
+              <IncreaseGuaranteedUsdQueries/>
             </TabPanel>
           </Tabs>
         </main>
