@@ -1,37 +1,57 @@
+'use client';
+
+import { useEffect, useState } from 'react';
+import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
+import Header from '@/app/components/header'
+import DecreasePoolAmountQueries from '@/app/components/decreasePoolAmountQueries'
+
 export default function Home() {
-  return (
-    <div className="bg-white text-black min-h-screen">
-      <header className="bg-black text-white py-16">
-        <div className="container mx-auto px-4">
-          <h1 className="text-4xl font-semibold mb-4">GMX Contract Querying Example</h1>
-          <p className="text-lg text-gray-400 mb-8">Querying and getting values for contract address 0x489ee077994B6658eAfA855C308275EAd8097C4A. This project is for interview purposes only. Created by Marc Bernardino.</p>
-          <a href="#" className="btn btn-primary">Call Function</a>
-        </div>
-      </header>
+  const [queryFunctionResults, setQFR] = useState();
+  const [activeTab, setActiveTab] = useState(0);
 
-      <main className="container mx-auto px-4 py-8">
-        <h2 className="text-2xl font-semibold mb-4">Features</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          <div className="bg-white rounded-lg p-4 shadow">
-            <h3 className="text-xl font-semibold mb-2">Feature 1</h3>
-            <p className="text-gray-600">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum luctus mi vitae nunc molestie, et euismod ex fermentum.</p>
-          </div>
-          <div className="bg-white rounded-lg p-4 shadow">
-            <h3 className="text-xl font-semibold mb-2">Feature 2</h3>
-            <p className="text-gray-600">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum luctus mi vitae nunc molestie, et euismod ex fermentum.</p>
-          </div>
-          <div className="bg-white rounded-lg p-4 shadow">
-            <h3 className="text-xl font-semibold mb-2">Feature 3</h3>
-            <p className="text-gray-600">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum luctus mi vitae nunc molestie, et euismod ex fermentum.</p>
-          </div>
-        </div>
-      </main>
+  const handleTabChange = (index) => {
+    setActiveTab(index);
+  };
+  useEffect(() => {
+    queryFunction('0x112726233fbeaeed0f5b1dba5cb0b2b81883dee49fb35ff99fd98ed9f6d31eb0');
+  }, []);
 
-      <footer className="bg-gray-200 py-4">
-        <div className="container mx-auto px-4 text-center">
-          <p className="text-gray-600">© 2023 Company Name. All rights reserved.</p>
-        </div>
-      </footer>
-    </div>
-  )
+  useEffect(() => {
+    console.log(queryFunctionResults); // Log the updated value of QFR when it changes
+  }, [queryFunctionResults])
+
+  const queryFunction = async (req: String) => {
+    const res = ((await fetch(`/api/queryContract?topic=${req}`)).json());
+    setQFR(await res); 
+  }
+
+  if (queryFunctionResults) {
+    return (
+      <div className="bg-white text-black min-h-screen">
+        <Header/>
+        <main className="container mx-auto px-4 py-8">
+          <Tabs selectedIndex={activeTab} onSelect={handleTabChange}>
+            <TabList className="tabs tabs-boxed">
+              <Tab className="tab">DecreasePoolAmount() Queries</Tab>
+              <Tab className="tab">IncreasePoolAmount() Queries</Tab>
+              <Tab className="tab">CollectSwapFees() Queries</Tab>
+              <Tab className="tab">UpdateFundingRate() Queries</Tab>
+              <Tab className="tab">IncreaseReservedAmount() Queries</Tab>
+              <Tab className="tab">CollectMarginFees() Queries</Tab>
+            </TabList>
+
+            <TabPanel>
+              <DecreasePoolAmountQueries/>
+            </TabPanel>
+            <TabPanel>
+              <h2>Content for Tab 2</h2>
+            </TabPanel>
+            <TabPanel>
+              <h2>Content for Tab 3</h2>
+            </TabPanel>
+          </Tabs>
+        </main>
+      </div>
+    ) 
+  } 
 }

@@ -1,0 +1,50 @@
+'use client';
+
+import { useEffect, useState } from 'react';
+
+export default function DecreasePoolAmountQueries() {
+    const [queryFunctionResults, setQFR] = useState();
+
+    useEffect(() => {
+        queryFunction('0x112726233fbeaeed0f5b1dba5cb0b2b81883dee49fb35ff99fd98ed9f6d31eb0');
+      }, []);
+    
+      const queryFunction = async (req: String) => {
+        const res = ((await fetch(`/api/queryContract?topic=${req}`)).json());
+        setQFR(await res); 
+      }
+    if (queryFunctionResults) {
+        return (
+            <main className="container mx-auto px-4 py-8">
+            <h2 className="text-2xl font-semibold mb-4">DecreasePoolAmount() Queries</h2>
+                <ul className="space-y-4">
+                {queryFunctionResults.map((log, index) => (
+                    <li key={index} className="bg-white p-4 shadow-md">
+                        <div>
+                        <strong>Transaction Hash:</strong> {log.transactionHash}
+                        </div>
+                        <div>
+                        <strong>Block Number:</strong> {log.blockNumber}
+                        </div>
+                        <div>
+                        <strong>Data:</strong> {log.data}
+                        </div>
+                        <div>
+                        <strong>Topics:</strong> {log.topics.join(', ')}
+                        </div>
+                    </li>
+                ))}
+                </ul>
+            </main>
+        ) 
+    }
+    else if (!queryFunctionResults) {
+        return (
+          <main className="container mx-auto px-4 py-8">
+            <h2 className="text-2xl font-semibold mb-4">Loading Queries</h2>
+            </main>
+        )
+      }
+    
+}
+
