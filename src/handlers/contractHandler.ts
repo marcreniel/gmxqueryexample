@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 //Import req modules
 const ethers = require('ethers');
 const fs = require('fs');
