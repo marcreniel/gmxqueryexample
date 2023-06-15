@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import Link from 'next/link'
 
 export default function IncreaseReservedAmountQueries() {
-    const [queryFunctionResults, setQFR] = useState();
+  const [queryFunctionResults, setQFR] = useState<any[]>([]);
 
     useEffect(() => {
         queryFunction('0xaa5649d82f5462be9d19b0f2b31a59b2259950a6076550bac9f3a1c07db9f66d');
@@ -12,7 +12,7 @@ export default function IncreaseReservedAmountQueries() {
     
       const queryFunction = async (req: String) => {
         const res = ((await fetch(`/api/queryContract?topic=${req}`)).json());
-        setQFR(await res); 
+        setQFR(await res || []);
       }
     if (queryFunctionResults) {
         return (

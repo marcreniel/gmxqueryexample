@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import Link from 'next/link'
 
 export default function BuyUSDGQueries() {
-    const [queryFunctionResults, setQFR] = useState();
+    const [queryFunctionResults, setQFR] = useState<any[]>([]);
 
     useEffect(() => {
         queryFunction('0xab4c77c74cd32c85f35416cf03e7ce9e2d4387f7b7f2c1f4bf53daaecf8ea72d');
@@ -12,7 +12,7 @@ export default function BuyUSDGQueries() {
     
       const queryFunction = async (req: String) => {
         const res = ((await fetch(`/api/queryContract?topic=${req}`)).json());
-        setQFR(await res); 
+        setQFR(await res || []);
       }
     if (queryFunctionResults) {
         return (

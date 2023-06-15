@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import Link from 'next/link'
 
 export default function IncreaseGuaranteedUsdQueries() {
-    const [queryFunctionResults, setQFR] = useState();
+  const [queryFunctionResults, setQFR] = useState<any[]>([]);
 
     useEffect(() => {
         queryFunction('0xd9d4761f75e0d0103b5cbeab941eeb443d7a56a35b5baf2a0787c03f03f4e474');
@@ -12,7 +12,7 @@ export default function IncreaseGuaranteedUsdQueries() {
     
       const queryFunction = async (req: String) => {
         const res = ((await fetch(`/api/queryContract?topic=${req}`)).json());
-        setQFR(await res); 
+        setQFR(await res || []);
       }
     if (queryFunctionResults) {
         return (

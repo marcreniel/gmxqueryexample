@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import Link from 'next/link'
 
 export default function CollectMarginFees() {
-    const [queryFunctionResults, setQFR] = useState();
+  const [queryFunctionResults, setQFR] = useState<any[]>([]);
 
     useEffect(() => {
         queryFunction('0x5d0c0019d3d45fadeb74eff9d2c9924d146d000ac6bcf3c28bf0ac3c9baa011a');
@@ -12,7 +12,7 @@ export default function CollectMarginFees() {
     
       const queryFunction = async (req: String) => {
         const res = ((await fetch(`/api/queryContract?topic=${req}`)).json());
-        setQFR(await res); 
+        setQFR(await res || []);
       }
     if (queryFunctionResults) {
         return (

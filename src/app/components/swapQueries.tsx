@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import Link from 'next/link'
 
 export default function SwapQueries() {
-    const [queryFunctionResults, setQFR] = useState();
+  const [queryFunctionResults, setQFR] = useState<any[]>([]);
 
     useEffect(() => {
         queryFunction('0x0874b2d545cb271cdbda4e093020c452328b24af12382ed62c4d00f5c26709db');
@@ -12,7 +12,7 @@ export default function SwapQueries() {
     
       const queryFunction = async (req: String) => {
         const res = ((await fetch(`/api/queryContract?topic=${req}`)).json());
-        setQFR(await res); 
+        setQFR(await res || []);
       }
     if (queryFunctionResults) {
         return (

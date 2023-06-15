@@ -19,9 +19,10 @@ export default function Home() {
   const [queryFunctionResults, setQFR] = useState();
   const [activeTab, setActiveTab] = useState(0);
 
-  const handleTabChange = (index) => {
+  const handleTabChange = (index: number) => {
     setActiveTab(index);
   };
+
   useEffect(() => {
     queryFunction('0x112726233fbeaeed0f5b1dba5cb0b2b81883dee49fb35ff99fd98ed9f6d31eb0');
   }, []);
