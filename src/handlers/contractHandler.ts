@@ -3,7 +3,7 @@ const ethers = require('ethers');
 const fs = require('fs');
 
 //Connecting to Arbitrum Mainnet through Alchemy 
-const alchemy = 'https://arb-mainnet.g.alchemy.com/v2/EtYwZ8wPjfeHD1oFwFOqoIsjt8tSvs_a';
+const alchemy = `https://arb-mainnet.g.alchemy.com/v2/${process.env.ALCHEMY_API_KEY}`;
 const contractAddress = '0x489ee077994B6658eAfA855C308275EAd8097C4A';
 const provider = new ethers.JsonRpcProvider(alchemy);
 
