@@ -1,5 +1,7 @@
 import { NextResponse } from 'next/server'
-import { logContractFunctionCalls } from '@/handlers/contractHandler';
+import logContractFunctionCalls from '@/handlers/contractHandler';
+
+export const dynamic = 'force-dynamic'
 
 // API endpoint that returns array of JSON objects for a specific topic0 (function call in contract)
 export async function GET(request: Request) {
@@ -9,6 +11,6 @@ export async function GET(request: Request) {
         const response = await logContractFunctionCalls(`${topic}`)
         return NextResponse.json( response );
     } catch (err) {
-        return NextResponse.json({ error: 'Error fetching API' });
+        return NextResponse.json({ error: `err` });
     }
 }

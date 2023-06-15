@@ -14,7 +14,7 @@ export default function CollectMarginFees() {
         const res = ((await fetch(`/api/queryContract?topic=${req}`)).json());
         setQFR(await res || []);
       }
-    if (queryFunctionResults) {
+      if (queryFunctionResults.length > 0) {
         return (
             <main className="container mx-auto px-4 py-8">
             <h2 className="text-2xl font-semibold mb-4">CollectMarginFees() Queries</h2>

@@ -16,27 +16,12 @@ import DecreaseGuaranteedUsdQueries from '@/app/components/decreaseGuaranteedUsd
 import IncreaseGuaranteedUsdQueries from '@/app/components/increaseReservedAmountQueries'
 
 export default function Home() {
-  const [queryFunctionResults, setQFR] = useState();
   const [activeTab, setActiveTab] = useState(0);
 
   const handleTabChange = (index: number) => {
     setActiveTab(index);
   };
 
-  useEffect(() => {
-    queryFunction('0x112726233fbeaeed0f5b1dba5cb0b2b81883dee49fb35ff99fd98ed9f6d31eb0');
-  }, []);
-
-  useEffect(() => {
-    console.log(queryFunctionResults); // Log the updated value of QFR when it changes
-  }, [queryFunctionResults])
-
-  const queryFunction = async (req: String) => {
-    const res = ((await fetch(`/api/queryContract?topic=${req}`)).json());
-    setQFR(await res); 
-  }
-
-  if (queryFunctionResults) {
     return (
       <div className="bg-white text-black min-h-screen">
         <Header/>
@@ -90,4 +75,3 @@ export default function Home() {
       </div>
     ) 
   } 
-}
