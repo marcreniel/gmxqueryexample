@@ -7,8 +7,8 @@ export const dynamic = 'force-dynamic'
 export async function GET(request: Request) {
     try {
         const { searchParams } = new URL(request.url);
-        const topic = searchParams.get('method');
-        const response = await queryTransactionsByMethod(`${topic}`)
+        const method = searchParams.get('method');
+        const response = await queryTransactionsByMethod(`${method}`)
         return NextResponse.json( response );
     } catch (err) {
         return NextResponse.json({ error: `err` });

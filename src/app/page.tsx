@@ -1,9 +1,10 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import Header from '@/app/components/header'
 
+import QueryTxSetTokenConfig from './components/queryTxSetTokenConfig';
 import DecreasePoolAmountQueries from '@/app/components/decreasePoolAmountQueries'
 import IncreasePoolAmountQueries from '@/app/components/increasePoolAmountQueries'
 import SwapQueries from '@/app/components/swapQueries'
@@ -28,6 +29,7 @@ export default function Home() {
         <main className="container mx-auto px-4 py-8">
           <Tabs selectedIndex={activeTab} onSelect={handleTabChange}>
             <TabList className="tabs tabs-boxed">
+              <Tab className="tab">setTokenConfig() Logs</Tab>
               <Tab className="tab">DecreasePoolAmount() Queries</Tab>
               <Tab className="tab">IncreasePoolAmount() Queries</Tab>
               <Tab className="tab">Swap() Queries</Tab>
@@ -40,6 +42,9 @@ export default function Home() {
               <Tab className="tab">IncreaseGuaranteedUsd() Queries</Tab>
             </TabList>
 
+            <TabPanel>
+              <QueryTxSetTokenConfig/>
+            </TabPanel>
             <TabPanel>
               <DecreasePoolAmountQueries/>
             </TabPanel>
