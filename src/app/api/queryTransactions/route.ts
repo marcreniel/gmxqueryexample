@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server'
-import { logContractFunctionCalls } from '@/handlers/contractHandler';
+import { queryTransactionsByMethod } from '@/handlers/contractHandler';
 
 export const dynamic = 'force-dynamic'
 
@@ -7,8 +7,8 @@ export const dynamic = 'force-dynamic'
 export async function GET(request: Request) {
     try {
         const { searchParams } = new URL(request.url);
-        const topic = searchParams.get('topic');
-        const response = await logContractFunctionCalls(`${topic}`)
+        const topic = searchParams.get('method');
+        const response = await queryTransactionsByMethod(`${topic}`)
         return NextResponse.json( response );
     } catch (err) {
         return NextResponse.json({ error: `err` });
