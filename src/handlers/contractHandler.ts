@@ -64,7 +64,7 @@ export async function queryTransactionsByMethod(method: string | null) {
             const res = await alchemy.core.getTransaction(hash)
             if(method === res?.data.slice(0, method?.length)){
                 const decodedData = decoder.decodeData(res?.data)            
-                queryArray.push([res, `${JSON.stringify(decodedData)}`]);
+                queryArray.push([res, `${JSON.stringify(decodedData)}`, decodedData]);
             }
           }
         

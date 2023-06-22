@@ -36,11 +36,75 @@ export default function QueryTxSetTokenConfig() {
                         <pre style={{ whiteSpace: "pre-wrap", wordBreak: "break-all" }}>
                           {transaction[0].data}
                         </pre>
+
                         </div>
                         <div>
-                        <strong>Decoded Data:</strong> 
-                        {transaction[1]}
+                        <strong>Decoded Raw JSON:</strong>{transaction[1]}
                         </div>
+                        <div>
+                        <strong className='text-xl'>Parsed Decoded Data</strong>
+                        </div>
+                        <div>
+                        {transaction[2].method}
+                          (
+                          {transaction[2].types[0] + transaction[2].names[0]}, 
+                          {transaction[2].types[1] + transaction[2].names[1]},
+                          {transaction[2].types[2] + transaction[2].names[2]},
+                          {transaction[2].types[3] + transaction[2].names[3]},
+                          {transaction[2].types[4] + transaction[2].names[4]},
+                          {transaction[2].types[5] + transaction[2].names[5]},
+                          {transaction[2].types[6] + transaction[2].names[6]}
+                          )
+                        </div>
+                        <div>
+                        <table>
+                          <thead>
+                              <tr>
+                                <th>Name</th>
+                                <th>Type</th>
+                                <th>Data</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                  <td>{transaction[2].names[0]}</td>
+                                  <td>{transaction[2].types[0]}</td>
+                                  <td><Link className="text-blue-500 underline" target="_blank" rel="noopener noreferrer" href={`https://arbiscan.io/address/0x${transaction[2].inputs[0]}`}>0x{transaction[2].inputs[0]}</Link></td>
+                                </tr>
+                                <tr>
+                                  <td>{transaction[2].names[1]}</td>
+                                  <td>{transaction[2].types[1]}</td>
+                                  <td>{parseInt(transaction[2].inputs[1].hex, 16)}</td>
+                                </tr>
+                                <tr>
+                                  <td>{transaction[2].names[2]}</td>
+                                  <td>{transaction[2].types[2]}</td>
+                                  <td>{parseInt(transaction[2].inputs[2].hex, 16)}</td>
+                                </tr>
+                                <tr>
+                                  <td>{transaction[2].names[3]}</td>
+                                  <td>{transaction[2].types[3]}</td>
+                                  <td>{parseInt(transaction[2].inputs[3].hex, 16)}</td>
+                                </tr>
+                                <tr>
+                                  <td>{transaction[2].names[4]}</td>
+                                  <td>{transaction[2].types[4]}</td>
+                                  <td>{parseInt(transaction[2].inputs[4].hex, 16)}</td>
+                                </tr>
+                                <tr>
+                                  <td>{transaction[2].names[5]}</td>
+                                  <td>{transaction[2].types[5]}</td>
+                                  <td>{transaction[2].inputs[5].toString()}</td>
+                                </tr>
+                                <tr>
+                                  <td>{transaction[2].names[6]}</td>
+                                  <td>{transaction[2].types[6]}</td>
+                                  <td>{transaction[2].inputs[6].toString()}</td>
+                                </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                        
                     </li>
                 ))}
                 </ul>
