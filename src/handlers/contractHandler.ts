@@ -1,12 +1,13 @@
 //Import req modules
 import { Alchemy, Network } from 'alchemy-sdk'
+import InputDataDecoder from 'ethereum-input-data-decoder';
 
 //Connecting to Arbitrum Mainnet through Alchemy 
 const config = {
     apiKey: process.env.ALCHEMY_API_KEY,
     network: Network.ARB_MAINNET,
 }
-
+const abi = require('@/app/components/abi.json')
 const vaultAddress = "0x489ee077994B6658eAfA855C308275EAd8097C4A";
 
 export async function logContractFunctionCalls(topics: string | null) {
@@ -41,7 +42,6 @@ export async function logContractFunctionCalls(topics: string | null) {
 export async function queryTransactionsByMethod(method: string | null) {
     try {
         const queryArray = []
-        
         const alchemy = new Alchemy(config);
             // @ts-expect-error
             const data = await alchemy.core.getAssetTransfers({
@@ -55,14 +55,16 @@ export async function queryTransactionsByMethod(method: string | null) {
             excludeZeroValue: false,
             maxCount: "0x3e8"
           });
-
+        
         const transfers = data.transfers;
+        const decoder = new InputDataDecoder(abi);
 
         for (const transfer of transfers) {
             const hash: string = transfer.hash;
             const res = await alchemy.core.getTransaction(hash)
             if(method === res?.data.slice(0, method?.length)){
-                queryArray.push(res);
+                const decodedData = decoder.decodeData(res?.data)            
+                queryArray.push([res, `${JSON.stringify(decodedData)}`]);
             }
           }
         

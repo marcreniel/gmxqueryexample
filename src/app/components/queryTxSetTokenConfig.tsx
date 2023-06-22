@@ -23,16 +23,23 @@ export default function QueryTxSetTokenConfig() {
                 {queryFunctionResults.map((transaction, index) => (
                     <li key={index} className="bg-white p-4 shadow-md">
                         <div>
-                        <strong>Transaction Hash: </strong><Link className="text-blue-500 underline" target="_blank" rel="noopener noreferrer" href={`https://arbiscan.io/tx/${transaction.hash}`}>{transaction.hash}</Link>
+                        <strong>Transaction Hash: </strong><Link className="text-blue-500 underline" target="_blank" rel="noopener noreferrer" href={`https://arbiscan.io/tx/${transaction[0].hash}`}>{transaction[0].hash}</Link>
                         </div>
                         <div>
-                        <strong>From:</strong> {transaction.from}
+                        <strong>From:</strong> {transaction[0].from}
                         </div>
                         <div>
-                        <strong>To:</strong> {transaction.to}
+                        <strong>To:</strong> {transaction[0].to}
                         </div>
                         <div>
-                        <strong>Data:</strong> {transaction.data}
+                        <strong >Encoded Data:</strong>
+                        <pre style={{ whiteSpace: "pre-wrap", wordBreak: "break-all" }}>
+                          {transaction[0].data}
+                        </pre>
+                        </div>
+                        <div>
+                        <strong>Decoded Data:</strong> 
+                        {transaction[1]}
                         </div>
                     </li>
                 ))}
